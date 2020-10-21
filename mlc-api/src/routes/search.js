@@ -6,7 +6,7 @@ server.get('/search', (req, res) => {
 
   fetch("https://api.mercadolibre.com/sites/MLA/search?q=" + query)
     .then(results => results.json())
-    .then(data => res.json(data))
+    .then(data => res.json(data.results))
     .catch(err => res.send(err));
 });
 
