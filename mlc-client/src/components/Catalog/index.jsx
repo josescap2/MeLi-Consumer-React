@@ -7,7 +7,13 @@ export default function({ products = []}) {
       {
         products.length > 0 ? products.map((product) => (
           <div>
-            <ProductCard title={product.title}/>
+            <ProductCard
+              title={product.title}
+              money={product.currency_id}
+              price={product.price}
+              stock={product.available_quantity}
+              image={product.thumbnail}
+            />
           </div>
         )) : (
           <React.Fragment>
