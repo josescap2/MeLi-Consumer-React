@@ -15,6 +15,7 @@ export default function({ products = []}) {
                 price={product.price}
                 stock={product.stock}
                 image={product.image}
+                permalink={product.link}
               />
             </Grid>
           )) : (

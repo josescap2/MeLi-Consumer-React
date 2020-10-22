@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles({
   root: {
@@ -25,29 +26,33 @@ const useStyles = makeStyles({
   },
 });
 
-export default function({ title = "", image = "", price = 0.0, money = "ARS", stock = 0 }) {
+export default function({ title = "", image = "", price = 0.0, money = "ARS", stock = 0, permalink}) {
   const classes = useStyles();
   
   return (
     <Card className={classes.root} variant="outlined">
       <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={image}
-          title={title}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {title}
-          </Typography>
-          <Typography gutterBottom variant="h5" component="h2">
-            {price} {money} - {stock === 0 ? "SIN STOCK" : stock === 1 ? "1 Disponible" : stock + " Disponibles"}
-          </Typography>
-        </CardContent>
+        <Link href={permalink} target="_blank" color="inherit">
+          <CardMedia
+            className={classes.media}
+            image={image}
+            title={title}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {title}
+            </Typography>
+            <Typography gutterBottom variant="h5" component="h2">
+              {price} {money} - {stock === 0 ? "SIN STOCK" : stock === 1 ? "1 Disponible" : stock + " Disponibles"}
+            </Typography>
+          </CardContent>
+        </Link>
       </CardActionArea>
       <CardActions>
         <Button color="primary">
-          Ver más
+          <Link href={permalink} target="_blank">
+            Ver más
+          </Link>
         </Button>
       </CardActions>
     </Card>
