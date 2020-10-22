@@ -10,12 +10,13 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CenteredTabs() {
+export default function CenteredTabs({ setPage = (value) => {}}) {
   const classes = useStyles();
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    setPage(newValue);
   };
 
   return (

@@ -12,7 +12,7 @@ export default function({ products = []}) {
       <Grid container justify="space-between">
         {
           products.length > 0 ? products.map((product, index) => (
-            index >= (page) * 10 && index < page + 1 * 10 ? (
+            index >= (page) * 10 && index < (page + 1) * 10 ? (
               <Grid item lg={6} key={v4()}>
                 <ProductCard
                   title={product.title}
@@ -38,7 +38,7 @@ export default function({ products = []}) {
       </Grid>
       {
         products.length > 0 ? (
-          <Pager />
+          <Pager setPage={setPage}/>
         ) : (
           <React.Fragment></React.Fragment>
         )
