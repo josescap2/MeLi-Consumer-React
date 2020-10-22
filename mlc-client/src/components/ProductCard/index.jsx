@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function({ products = []}) {
+export default function({ product }) {
   return (
     <div>
       
