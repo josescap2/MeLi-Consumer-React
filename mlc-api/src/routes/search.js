@@ -13,7 +13,8 @@ server.get('/search', (req, res) => {
           price: e.price,
           money: e.currency_id,
           image: e.thumbnail,
-          stock: e.available_quantity
+          stock: e.available_quantity,
+          link: e.permalink
         }
       });
       res.status(200).json(products);
