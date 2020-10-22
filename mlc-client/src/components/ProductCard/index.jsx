@@ -11,9 +11,17 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    minHeight: 500,
+    margin: "16px auto",
+    border: "grey .5px solid",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   media: {
-    height: 350,
+    minHeight: 350,
+    maxHeight: 350,
   },
 });
 
@@ -21,7 +29,7 @@ export default function({ title = "", image = "", price = 0.0, money = "ARS", st
   const classes = useStyles();
   
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} variant="outlined">
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -38,8 +46,8 @@ export default function({ title = "", image = "", price = 0.0, money = "ARS", st
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Learn More
+        <Button color="primary">
+          Ver más
         </Button>
       </CardActions>
     </Card>
