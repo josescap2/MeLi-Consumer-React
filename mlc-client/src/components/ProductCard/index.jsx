@@ -33,7 +33,7 @@ export default function({ title = "", image = "", price = 0.0, money = "ARS", st
             {title}
           </Typography>
           <Typography gutterBottom variant="h5" component="h2">
-            {price} {money} - {stock == 0 ? "SIN STOCK" : stock == 1 ? "1 Disponible" : stock + " Disponibles"}
+            {price} {money} - {stock === 0 ? "SIN STOCK" : stock === 1 ? "1 Disponible" : stock + " Disponibles"}
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -9,10 +9,10 @@ export default function({ products = []}) {
           <div>
             <ProductCard
               title={product.title}
-              money={product.currency_id}
+              money={product.money}
               price={product.price}
-              stock={product.available_quantity}
-              image={product.thumbnail}
+              stock={product.stock}
+              image={product.image}
             />
           </div>
         )) : (
