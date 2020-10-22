@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchAppBar({setProducts, setFetched}) {
+export default function SearchAppBar({setProducts}) {
   // USE STYLES
   const classes = useStyles();
 
@@ -89,7 +89,7 @@ export default function SearchAppBar({setProducts, setFetched}) {
               name="query"
               onChange={(e) => handleInputChange(e, setQuery)}
             />
-            <Button onClick={() => handleOnSubmit(query, setProducts, setFetched)}>
+            <Button onClick={() => handleOnSubmit(query, setProducts)}>
               <Typography style={{color: "white"}}>
                 Buscar
               </Typography>

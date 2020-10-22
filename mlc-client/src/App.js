@@ -6,18 +6,11 @@ import Catalog from './components/Catalog';
 function App() {
   // HOOKS
   const [products, setProducts] = useState([]);
-  const [fetched, setFetched] = useState(false);
 
   return (
     <div>
-      <SearchBar setProducts={setProducts} setFetched={setFetched}/>
-      {
-        fetched && products.length > 0 ? (
-          <Catalog products={products}/>
-        ) : (
-          <React.Fragment></React.Fragment>
-        )
-      }
+      <SearchBar setProducts={setProducts}/>
+      <Catalog products={products}/>
     </div>
   );
 }

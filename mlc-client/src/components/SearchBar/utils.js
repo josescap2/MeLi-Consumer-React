@@ -3,9 +3,8 @@ export function handleInputChange(e, cb) {
   cb(e.target.value);
 }
 
-export function handleOnSubmit(query, cb, fetched) {
+export function handleOnSubmit(query, cb) {
   fetchProducts(query, cb);
-  fetched(true);
 }
 
 // FETCH FUNCTIONS
