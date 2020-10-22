@@ -6,7 +6,18 @@ server.get('/search', (req, res) => {
 
   fetch("https://api.mercadolibre.com/sites/MLA/search?q=" + query)
     .then(results => results.json())
-    .then(data => res.json(data.results))
+    .then(data => {
+      const products = data.results.map((e) => {
+        return {
+          title: e.title,
+          price: e.price,
+          money: e.currency_id,
+          image: e.thumbnail,
+          stock: e.available_quantity
+        }
+      });
+      res.status(200).json(products);
+    })
     .catch(err => res.send(err));
 });
 
