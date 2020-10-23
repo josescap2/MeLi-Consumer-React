@@ -1,14 +1,15 @@
 // HANDLERS
-export function handleInputChange(e, cb) {
-  cb(e.target.value);
+export function handleInputChange(e, inputChange) {
+  inputChange(e.target.value);
 }
 
-export function handleOnSubmit(query, cb) {
-  fetchProducts(query, cb);
+export function handleOnSubmit(query, setCache, cache) {
+  if (!cache.hasOwnProperty(query))
+    fetchProducts(query, setCache, cache);
 }
 
 // FETCH FUNCTIONS
-async function fetchProducts(query, cb) {
+async function fetchProducts(query, setCache, cache) {
   var requestOptions = {
     method: 'GET',
     redirect: 'follow'
@@ -17,5 +18,20 @@ async function fetchProducts(query, cb) {
   const results = await fetch("http://localhost:8080/api/search?query=" + query, requestOptions)
   const data = await results.json();
 
-  cb(data);
+  const asc = [...data].sort((a, b) => a.price - b.price);
+  const desc = [...asc].reverse();
+
+  const news = [...data].filter(e => e.condition === 'new');
+  const used = [...data].filter(e => e.condition === 'used');
+
+  setCache({
+    ...cache,
+    [query]: {
+      noFilter: data,
+      asc,
+      desc,
+      news,
+      used
+    }
+  });
 }

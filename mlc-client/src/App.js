@@ -6,10 +6,11 @@ import Catalog from './components/Catalog';
 function App() {
   // HOOKS
   const [products, setProducts] = useState([]);
+  const [cache, setCache] = useState({});
 
   return (
     <div>
-      <SearchBar setProducts={setProducts}/>
+      <SearchBar setProducts={setProducts} setCache={setCache} cache={cache}/>
       <Catalog products={products}/>
     </div>
   );
