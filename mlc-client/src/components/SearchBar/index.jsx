@@ -101,12 +101,11 @@ export default function SearchAppBar({setProducts, setCache, cache, setFilter, f
 
   async function fetchProducts() {
     if (!cache.hasOwnProperty(query)) {
-      var requestOptions = {
+      const results = await fetch("http://localhost:8080/api/search?query=" + query, {
         method: 'GET',
         redirect: 'follow'
-      };
+      });
       
-      const results = await fetch("http://localhost:8080/api/search?query=" + query, requestOptions)
       const data = await results.json();
     
       const asc = [...data].sort((a, b) => a.price - b.price);
