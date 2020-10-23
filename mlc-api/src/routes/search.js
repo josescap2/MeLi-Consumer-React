@@ -14,7 +14,8 @@ server.get('/search', (req, res) => {
           money: e.currency_id,
           image: e.thumbnail,
           stock: e.available_quantity,
-          link: e.permalink
+          link: e.permalink,
+          condition: e.condition
         }
       });
       res.status(200).json(products);
