@@ -1,8 +1,16 @@
 import React from 'react';
 import { useState } from 'react';
-import { AppBar, Toolbar, Typography, InputBase, Button } from '@material-ui/core/';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import InputBase from '@material-ui/core/InputBase';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import FilterListIcon from '@material-ui/icons/FilterList';
 import { handleInputChange, handleOnSubmit } from './utils.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -60,12 +68,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchAppBar({setProducts}) {
+export default function SearchAppBar({setProducts, setFilter}) {
   // USE STYLES
   const classes = useStyles();
 
   // HOOKS
   const [query, setQuery] = useState("");
+  const [anchor, setAnchor] = useState(null);
+
+  function handleClick(event) {
+    setAnchor(event.currentTarget);
+  }
+
+  function handleClose() {
+    setAnchor(null);
+  }
 
   return (
     <div className={classes.root}>
@@ -94,6 +111,30 @@ export default function SearchAppBar({setProducts}) {
                 Buscar
               </Typography>
             </Button>
+          </div>
+          <div>
+            <IconButton
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <FilterListIcon style={{color: "white"}}/>
+            </IconButton>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchor}
+              keepMounted
+              open={Boolean(anchor)}
+              onClose={handleClose}
+            >
+              <MenuItem>Reiniciar</MenuItem>
+              <hr/>
+              <MenuItem>Ascendente</MenuItem>
+              <MenuItem>Descendente</MenuItem>
+              <hr/>
+              <MenuItem>Nuevo</MenuItem>
+              <MenuItem>Usado</MenuItem>
+            </Menu>
           </div>
         </Toolbar>
       </AppBar>
