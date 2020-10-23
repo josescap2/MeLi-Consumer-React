@@ -1,6 +1,6 @@
 # MeLi-Consumer
 
-Una aplicacion que consume una API de Mercado Libre. Cuenta con un Fornt-End React y un Back-End con Node y express
+Una aplicacion que consume una API de Mercado Libre. Con un buscador sencillo, consulta y renderiza Cards de productos de ML.
 
 ## Front-End
 
@@ -27,3 +27,13 @@ npm start
 ```
 
 ## Agradecimientos
+
+- [Soy Henry](https://www.soyhenry.com/) - Una bootcamp online que invierte en el futuro de sus alumnos!
+- [Palacio, Solano](https://www.linkedin.com/in/solanopalacio/) - Instructor Javascript Y Technical Leader
+- [Tralice, Antonio](https://www.linkedin.com/in/antoniotralice/) - Co-Founder en Soy Henry y Instructor Javascript
+- [Chequer Minniti, Emiliano](https://www.linkedin.com/in/emiliano-chequer-minniti/) - Instructor Javascript
+- [Amani, Juan Agustin](https://www.linkedin.com/in/juan-agustin-amani/) - Project Manager Javascript
+- [Cameron Laurlund, Mark Bertel](https://www.linkedin.com/in/mark-bertel-cameron-laurlund-0aa649b2/) - Project Manager Javascript
+
+
+
