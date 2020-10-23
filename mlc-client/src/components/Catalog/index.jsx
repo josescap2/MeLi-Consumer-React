@@ -24,7 +24,7 @@ export default function({ products = []}) {
                 />
               </Grid>
             ) : (
-              <React.Fragment>
+              <React.Fragment key={ v4() }>
               </React.Fragment>
             )
           )) : (

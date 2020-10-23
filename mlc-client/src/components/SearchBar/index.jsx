@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchAppBar({setProducts, setCache, cache, setFilter, filter}) {
+export default function SearchAppBar({setProducts, setCache, cache, setFilter, filter, av}) {
   // USE STYLES
   const classes = useStyles();
 
@@ -94,7 +94,8 @@ export default function SearchAppBar({setProducts, setCache, cache, setFilter, f
 
   function handleSetFilter(value) {
     setFilter(value);
-    setProducts([...cache[query][value]]);
+    if (av)
+      setProducts([...cache[query][value]]);
     setAnchor(null);
   }
 

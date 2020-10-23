@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import SearchBar from './components/SearchBar';
 import Catalog from './components/Catalog';
@@ -17,6 +17,7 @@ function App() {
         cache={cache} 
         setFilter={setFilter} 
         filter={filter}
+        av={products.length > 0 ? true : false}
       />
       <Catalog products={products}/>
     </div>
