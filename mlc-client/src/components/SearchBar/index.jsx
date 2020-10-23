@@ -11,7 +11,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import { handleInputChange, handleOnSubmit } from './utils.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchAppBar({setProducts, setCache, cache}) {
+export default function SearchAppBar({setProducts, setCache, cache, setFilter, filter}) {
   // USE STYLES
   const classes = useStyles();
 
@@ -82,6 +81,51 @@ export default function SearchAppBar({setProducts, setCache, cache}) {
 
   function handleClose() {
     setAnchor(null);
+  }
+
+  function handleInputChange(e) {
+    setQuery(e.target.value);
+  }
+  
+  function handleOnSubmit() {
+    setFilter('noFilter');
+    fetchProducts();
+  }
+
+  function handleSetFilter(value) {
+    setFilter(value);
+    setProducts([...cache[query][value]]);
+    setAnchor(null);
+  }
+
+  async function fetchProducts() {
+    if (!cache.hasOwnProperty(query)) {
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      
+      const results = await fetch("http://localhost:8080/api/search?query=" + query, requestOptions)
+      const data = await results.json();
+    
+      const asc = [...data].sort((a, b) => a.price - b.price);
+      const desc = [...asc].reverse();
+    
+      const news = [...data].filter(e => e.condition === 'new');
+      const used = [...data].filter(e => e.condition === 'used');
+    
+      setCache({
+        ...cache,
+        [query]: {
+          noFilter: data,
+          asc,
+          desc,
+          news,
+          used
+        }
+      });
+      setProducts(data);
+    }
   }
 
   return (
@@ -104,9 +148,9 @@ export default function SearchAppBar({setProducts, setCache, cache}) {
               inputProps={{ 'aria-label': 'search' }}
               value={query}
               name="query"
-              onChange={(e) => handleInputChange(e, setQuery)}
+              onChange={handleInputChange}
             />
-            <Button onClick={() => handleOnSubmit(query, setCache, cache)}>
+            <Button onClick={handleOnSubmit}>
               <Typography style={{color: "white"}}>
                 Buscar
               </Typography>
@@ -127,13 +171,38 @@ export default function SearchAppBar({setProducts, setCache, cache}) {
               open={Boolean(anchor)}
               onClose={handleClose}
             >
-              <MenuItem>Reiniciar</MenuItem>
+              {
+                filter === 'asc' ? (
+                  <MenuItem onClick={() => handleSetFilter('noFilter')} style={{color: "blue"}}>Ascendente</MenuItem>
+                ) : (
+                  <MenuItem onClick={() => {handleSetFilter('asc')}}>Ascendente</MenuItem>
+
+                )
+              }
+              {
+                filter === 'desc' ? (
+                  <MenuItem onClick={() => handleSetFilter('noFilter')} style={{color: "blue"}}>Descendente</MenuItem>
+                ) : (
+                  <MenuItem onClick={() => handleSetFilter('desc')}>Descendente</MenuItem>
+                )
+              }
               <hr/>
-              <MenuItem>Ascendente</MenuItem>
-              <MenuItem>Descendente</MenuItem>
+              {
+                filter === "news" ? (
+                  <MenuItem onClick={() => handleSetFilter('noFilter')} style={{color: "green"}}>Nuevo</MenuItem>
+                ) : (
+                  <MenuItem onClick={() => handleSetFilter('news')}>Nuevo</MenuItem>
+                )
+              }
+              {
+                filter === "used" ? (
+                  <MenuItem onClick={() => handleSetFilter('noFilter')} style={{color: "green"}}>Usado</MenuItem>
+                ) : (
+                  <MenuItem onClick={() => handleSetFilter('used')}>Usado</MenuItem>
+                )
+              }
               <hr/>
-              <MenuItem>Nuevo</MenuItem>
-              <MenuItem>Usado</MenuItem>
+              <MenuItem onClick={() => handleSetFilter('noFilter')}>Limpiar</MenuItem>
             </Menu>
           </div>
         </Toolbar>
